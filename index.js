@@ -52,6 +52,30 @@ app.get('/test', (req, res) => {
   });
 });
 
+app.get('/test-book', (req, res) => {
+  console.log(JSON.stringify({
+    time: new Date().toISOString(),
+    endpoint: '/test-book',
+    msg: 'Test book endpoint accessed'
+  }));
+  
+  const titles = ['The Great Gatsby', 'To Kill a Mockingbird', '1984', 'Pride and Prejudice', 'The Catcher in the Rye', 'Harry Potter and the Sorcerer\'s Stone', 'The Lord of the Rings', 'The Hobbit', 'Fahrenheit 451', 'Brave New World'];
+  const authors = ['F. Scott Fitzgerald', 'Harper Lee', 'George Orwell', 'Jane Austen', 'J.D. Salinger', 'J.K. Rowling', 'J.R.R. Tolkien', 'J.R.R. Tolkien', 'Ray Bradbury', 'Aldous Huxley'];
+  const genres = ['Fiction', 'Classic', 'Dystopian', 'Romance', 'Fantasy', 'Science Fiction', 'Adventure'];
+  
+  const randomIndex = Math.floor(Math.random() * titles.length);
+  const randomYear = Math.floor(Math.random() * (2023 - 1950 + 1)) + 1950;
+  
+  res.json({
+    id: Math.floor(Math.random() * 1000) + 1,
+    title: titles[randomIndex],
+    author: authors[randomIndex],
+    publishedYear: randomYear,
+    genre: genres[Math.floor(Math.random() * genres.length)],
+    timestamp: new Date().toISOString()
+  });
+});
+
 app.listen(PORT, () => {
   console.log(JSON.stringify({ time: new Date().toISOString(), msg: `Server started on port ${PORT}` }));
 });
