@@ -35,6 +35,23 @@ app.get('/health', (req, res) => {
   res.json({ status: 'ok' });
 });
 
+app.get('/test', (req, res) => {
+  console.log(JSON.stringify({
+    time: new Date().toISOString(),
+    endpoint: '/test',
+    msg: 'Test endpoint accessed'
+  }));
+  res.json({
+    message: 'This is a test endpoint',
+    timestamp: new Date().toISOString(),
+    dummyData: {
+      id: 1,
+      name: 'Test Item',
+      value: Math.random()
+    }
+  });
+});
+
 app.listen(PORT, () => {
   console.log(JSON.stringify({ time: new Date().toISOString(), msg: `Server started on port ${PORT}` }));
 });
